@@ -248,4 +248,18 @@ public class QuantityMeasurementAppTest {
         double result = a.subtract(b).divide(c);
         assertEquals(2.0, result);
     }
+    
+
+    @Test
+    public void testValidation_NullOperand_Add() {
+        Quantity<LengthUnit> q = new Quantity<>(10.0, LengthUnit.FEET);
+        assertThrows(IllegalArgumentException.class, () -> q.add(null));
+    }
+
+    @Test
+    public void testValidation_NullOperand_Subtract() {
+        Quantity<LengthUnit> q = new Quantity<>(10.0, LengthUnit.FEET);
+        assertThrows(IllegalArgumentException.class, () -> q.subtract(null));
+    }
+
 }
