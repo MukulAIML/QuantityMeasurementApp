@@ -32,7 +32,7 @@ public class QuantityMeasurementApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=== Length Operations ===");
+        System.out.println("Length Operations");
         demonstrateEquality(
             new Quantity<>(1.0, LengthUnit.FEET),
             new Quantity<>(12.0, LengthUnit.INCHES)
@@ -58,7 +58,7 @@ public class QuantityMeasurementApp {
             LengthUnit.YARDS
         );
 
-        System.out.println("\n=== Weight Operations ===");
+        System.out.println("Weight Operations");
         demonstrateEquality(
             new Quantity<>(1.0, WeightUnit.KILOGRAM),
             new Quantity<>(1000.0, WeightUnit.GRAM)
@@ -88,5 +88,21 @@ public class QuantityMeasurementApp {
         Quantity<WeightUnit> weight = new Quantity<>(1.0, WeightUnit.KILOGRAM);
         System.out.println("Quantity(1.0, FEET).equals(Quantity(1.0, KILOGRAM)) ? "
             + length.equals(weight));
+        
+        System.out.println("Volume Operations");
+        demonstrateEquality(
+        	    new Quantity<>(1.0, VolumeUnit.LITRE),
+        	    new Quantity<>(1000.0, VolumeUnit.MILLILITRE)
+        	);
+        
+        demonstrateConversion(
+        	    new Quantity<>(1.0, VolumeUnit.LITRE), VolumeUnit.MILLILITRE
+        	);
+        demonstrateAddition(
+        	    new Quantity<>(1.0, VolumeUnit.LITRE),
+        	    new Quantity<>(1000.0, VolumeUnit.MILLILITRE),
+        	    VolumeUnit.MILLILITRE
+        	);
+
     }
 }
