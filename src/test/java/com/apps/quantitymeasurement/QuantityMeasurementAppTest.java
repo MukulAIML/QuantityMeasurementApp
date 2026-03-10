@@ -248,4 +248,64 @@ public class QuantityMeasurementAppTest {
         double result = a.subtract(b).divide(c);
         assertEquals(2.0, result);
     }
+    
+
+    @Test
+    public void testValidation_NullOperand_Add() {
+        Quantity<LengthUnit> q = new Quantity<>(10.0, LengthUnit.FEET);
+        assertThrows(IllegalArgumentException.class, () -> q.add(null));
+    }
+
+    @Test
+    public void testValidation_NullOperand_Subtract() {
+        Quantity<LengthUnit> q = new Quantity<>(10.0, LengthUnit.FEET);
+        assertThrows(IllegalArgumentException.class, () -> q.subtract(null));
+    }
+
+    
+    // Temperature Equality Tests
+
+    @Test
+    public void testTemperatureEquality_CelsiusToCelsius_SameValue() {
+        Quantity<TemperatureUnit> q1 = new Quantity<>(0.0, TemperatureUnit.CELSIUS);
+        Quantity<TemperatureUnit> q2 = new Quantity<>(0.0, TemperatureUnit.CELSIUS);
+        assertTrue(q1.equals(q2));
+    }
+
+    // Temperature Conversion Tests
+
+    @Test
+    public void testTemperatureConversion_CelsiusToFahrenheit_0() {
+        Quantity<TemperatureUnit> result = new Quantity<>(0.0, TemperatureUnit.CELSIUS)
+                .convertTo(TemperatureUnit.FAHRENHEIT);
+        assertEquals("32.0 FAHRENHEIT", result.toString());
+    }
+    
+    // Unsupported Operation Tests
+
+    @Test
+    public void testTemperatureUnsupportedOperation_Add() {
+        Quantity<TemperatureUnit> q = new Quantity<>(100.0, TemperatureUnit.CELSIUS);
+        assertThrows(UnsupportedOperationException.class, () ->
+                q.add(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+    }
+    
+    @Test
+    public void testTemperatureUnsupportedOperation_Subtract() {
+        Quantity<TemperatureUnit> q = new Quantity<>(100.0, TemperatureUnit.CELSIUS);
+        assertThrows(UnsupportedOperationException.class, () ->
+                q.subtract(new Quantity<>(50.0, TemperatureUnit.CELSIUS)));
+    }
+
+
+    // Cross-Category Prevention Tests
+
+    @Test
+    public void testTemperatureVsLength_Incompatible() {
+        Quantity<TemperatureUnit> temp = new Quantity<>(100.0, TemperatureUnit.CELSIUS);
+        Quantity<LengthUnit> length = new Quantity<>(100.0, LengthUnit.FEET);
+        assertFalse(temp.equals(length));
+    }
+
+
 }

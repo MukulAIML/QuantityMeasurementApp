@@ -175,6 +175,18 @@ public class QuantityMeasurementApp {
 	         new Quantity<>(5.0, VolumeUnit.LITRE),
 	         new Quantity<>(10.0, VolumeUnit.LITRE)
 	     );
-	
+	     
+	     System.out.println("Temperature Operations");
+	     
+	     // Equality
+	     demonstrateEquality(
+	         new Quantity<>(0.0, TemperatureUnit.CELSIUS),
+	         new Quantity<>(32.0, TemperatureUnit.FAHRENHEIT)
+	     );
+	     
+	     // Conversion
+	     demonstrateConversion(
+	         new Quantity<>(100.0, TemperatureUnit.CELSIUS), TemperatureUnit.FAHRENHEIT
+	     );
     }
 }
