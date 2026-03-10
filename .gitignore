@@ -1,7 +1,0 @@
-.config/
-.vscode/
-.settings/
-bin/
-target/
-*.class
-*.log
