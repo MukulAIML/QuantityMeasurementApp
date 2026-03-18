@@ -1,34 +1,13 @@
 package com.apps.quantitymeasurement.unit;
 
-@FunctionalInterface
-interface SupportsArithmetic {
-    boolean isSupported();
-}
-
 public interface IMeasurable {
-    double getConversionFactor();
-    double convertToBaseUnit(double value);
-    double convertFromBaseUnit(double baseValue);
-    String getUnitName();
-    String getMeasurementType();
+	double getConversionFactor();
 
-    static IMeasurable getUnitByName(String measurementType, String unitName) {
-        switch (measurementType.toUpperCase()) {
-            case "LENGTH":      return LengthUnit.valueOf(unitName.toUpperCase());
-            case "WEIGHT":      return WeightUnit.valueOf(unitName.toUpperCase());
-            case "VOLUME":      return VolumeUnit.valueOf(unitName.toUpperCase());
-            case "TEMPERATURE": return TemperatureUnit.valueOf(unitName.toUpperCase());
-            default:
-                throw new IllegalArgumentException(
-                    "Unknown measurement type: " + measurementType);
-        }
-    }
+	double convertToBaseUnit(double value);
 
-    SupportsArithmetic supportsArithmetic = () -> true;
+	double convertFromBaseUnit(double baseValue);
 
-    default boolean supportsArithmetic() {
-        return supportsArithmetic.isSupported();
-    }
+	String getUnitName();
 
-    default void validateOperationSupport(String operation) {}
+	boolean supportsArithmetic();
 }

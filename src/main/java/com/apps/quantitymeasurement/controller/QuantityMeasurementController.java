@@ -1,74 +1,69 @@
 package com.apps.quantitymeasurement.controller;
 
-import com.apps.quantitymeasurement.entity.QuantityDTO;
-import com.apps.quantitymeasurement.exception.QuantityMeasurementException;
+import com.apps.quantitymeasurement.dto.QuantityInputDTO;
+import com.apps.quantitymeasurement.entity.QuantityMeasurementEntity;
 import com.apps.quantitymeasurement.service.IQuantityMeasurementService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.logging.Logger;
+import java.util.List;
 
+@RestController
+@RequestMapping("/api/v1/quantities")
+@Tag(name = "Quantity Measurements", description = "REST API for quantity measurement operations")
 public class QuantityMeasurementController {
 
-	private static final Logger logger = Logger.getLogger(QuantityMeasurementController.class.getName());
+	@Autowired
+	private IQuantityMeasurementService service;
 
-	private final IQuantityMeasurementService service;
-
-	public QuantityMeasurementController(IQuantityMeasurementService service) {
-		this.service = service;
-		logger.info("Controller initialized");
+	@PostMapping("/compare")
+	@Operation(summary = "Compare two quantities")
+	public ResponseEntity<QuantityMeasurementEntity> compare(@RequestBody QuantityInputDTO input) {
+		return ResponseEntity.ok(service.compare(input));
 	}
 
-	public boolean performComparison(QuantityDTO dto1, QuantityDTO dto2) {
-		try {
-			boolean result = service.compare(dto1, dto2);
-			logger.info("compare(" + dto1 + ", " + dto2 + ") = " + result);
-			return result;
-		} catch (QuantityMeasurementException e) {
-			logger.warning("compare failed: " + e.getMessage());
-			return false;
-		}
+	@PostMapping("/convert")
+	@Operation(summary = "Convert a quantity to another unit")
+	public ResponseEntity<QuantityMeasurementEntity> convert(@RequestBody QuantityInputDTO input) {
+		return ResponseEntity.ok(service.convert(input));
 	}
 
-	public QuantityDTO performConversion(QuantityDTO dto, String targetUnit) {
-		try {
-			QuantityDTO result = service.convert(dto, targetUnit);
-			logger.info("convert(" + dto + ", " + targetUnit + ") = " + result);
-			return result;
-		} catch (QuantityMeasurementException e) {
-			logger.warning("convert failed: " + e.getMessage());
-			return null;
-		}
+	@PostMapping("/add")
+	@Operation(summary = "Add two quantities")
+	public ResponseEntity<QuantityMeasurementEntity> add(@RequestBody QuantityInputDTO input) {
+		return ResponseEntity.ok(service.add(input));
 	}
 
-	public QuantityDTO performAddition(QuantityDTO dto1, QuantityDTO dto2, String targetUnit) {
-		try {
-			QuantityDTO result = service.add(dto1, dto2, targetUnit);
-			logger.info("add(" + dto1 + ", " + dto2 + ", " + targetUnit + ") = " + result);
-			return result;
-		} catch (QuantityMeasurementException e) {
-			logger.warning("add failed: " + e.getMessage());
-			return null;
-		}
+	@PostMapping("/subtract")
+	@Operation(summary = "Subtract two quantities")
+	public ResponseEntity<QuantityMeasurementEntity> subtract(@RequestBody QuantityInputDTO input) {
+		return ResponseEntity.ok(service.subtract(input));
 	}
 
-	public QuantityDTO performSubtraction(QuantityDTO dto1, QuantityDTO dto2, String targetUnit) {
-		try {
-			QuantityDTO result = service.subtract(dto1, dto2, targetUnit);
-			logger.info("subtract(" + dto1 + ", " + dto2 + ", " + targetUnit + ") = " + result);
-			return result;
-		} catch (QuantityMeasurementException e) {
-			logger.warning("subtract failed: " + e.getMessage());
-			return null;
-		}
+	@PostMapping("/divide")
+	@Operation(summary = "Divide two quantities")
+	public ResponseEntity<QuantityMeasurementEntity> divide(@RequestBody QuantityInputDTO input) {
+		return ResponseEntity.ok(service.divide(input));
 	}
 
-	public double performDivision(QuantityDTO dto1, QuantityDTO dto2) {
-		try {
-			double result = service.divide(dto1, dto2);
-			logger.info("divide(" + dto1 + ", " + dto2 + ") = " + result);
-			return result;
-		} catch (QuantityMeasurementException e) {
-			logger.warning("divide failed: " + e.getMessage());
-			return Double.NaN;
-		}
+	@GetMapping("/history")
+	@Operation(summary = "Get all operation history")
+	public ResponseEntity<List<QuantityMeasurementEntity>> getHistory() {
+		return ResponseEntity.ok(service.getHistory());
+	}
+
+	@GetMapping("/history/{operation}")
+	@Operation(summary = "Get history by operation type")
+	public ResponseEntity<List<QuantityMeasurementEntity>> getHistoryByOperation(@PathVariable String operation) {
+		return ResponseEntity.ok(service.getHistoryByOperation(operation));
+	}
+
+	@GetMapping("/count/{operation}")
+	@Operation(summary = "Get count of successful operations by type")
+	public ResponseEntity<Long> getOperationCount(@PathVariable String operation) {
+		return ResponseEntity.ok(service.getOperationCount(operation));
 	}
 }
