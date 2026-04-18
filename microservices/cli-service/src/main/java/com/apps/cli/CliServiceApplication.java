@@ -1,4 +1,4 @@
-5package com.apps.cli;
+package com.apps.cli;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,11 +1,12 @@
+com/apps/cli/command/HistoryCommands.class
+com/apps/cli/CliServiceApplication.class
+com/apps/cli/controller/CliController.class
+com/apps/cli/dto/LoginRequestDTO.class
 com/apps/cli/config/AppConfig.class
 com/apps/cli/service/ApiClient.class
-com/apps/cli/command/HistoryCommands.class
 com/apps/cli/service/SessionState.class
-com/apps/cli/CliServiceApplication.class
 com/apps/cli/dto/AuthResponseDTO.class
 com/apps/cli/command/QuantityCommands.class
 com/apps/cli/dto/QuantityDTO.class
 com/apps/cli/dto/QuantityInputDTO.class
 com/apps/cli/command/AuthCommands.class
-com/apps/cli/dto/LoginRequestDTO.class
