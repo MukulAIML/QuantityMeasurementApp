@@ -1,0 +1,7 @@
+/home/mukul-verma/Downloads/microservices/api-gateway/src/main/java/com/apps/gateway/ApiGatewayApplication.java
+/home/mukul-verma/Downloads/microservices/api-gateway/src/main/java/com/apps/gateway/config/ProxyConfig.java
+/home/mukul-verma/Downloads/microservices/api-gateway/src/main/java/com/apps/gateway/config/SecurityConfig.java
+/home/mukul-verma/Downloads/microservices/api-gateway/src/main/java/com/apps/gateway/filter/JwtAuthFilter.java
+/home/mukul-verma/Downloads/microservices/api-gateway/src/main/java/com/apps/gateway/controller/MeasurementProxyController.java
+/home/mukul-verma/Downloads/microservices/api-gateway/src/main/java/com/apps/gateway/filter/JwtUtil.java
+/home/mukul-verma/Downloads/microservices/api-gateway/src/main/java/com/apps/gateway/controller/AuthProxyController.java

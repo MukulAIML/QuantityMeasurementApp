@@ -1,0 +1,7 @@
+com/apps/gateway/config/ProxyConfig.class
+com/apps/gateway/filter/JwtAuthFilter.class
+com/apps/gateway/config/SecurityConfig.class
+com/apps/gateway/controller/AuthProxyController.class
+com/apps/gateway/filter/JwtUtil.class
+com/apps/gateway/ApiGatewayApplication.class
+com/apps/gateway/controller/MeasurementProxyController.class
